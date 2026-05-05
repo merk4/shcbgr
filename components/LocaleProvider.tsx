@@ -177,7 +177,7 @@ const messages: Record<Locale, Messages> = {
     },
     hero: {
       eyebrow: "CrossFit Box στο Κερατσίνι",
-      // titleLead: "Κλείσε Πρώτα.",
+      titleLead: "",
       titleAccent: "Unleash Your Inner Hero.",
       copy:
         "Το βασικό σημείο του Superheroes Crossbox είναι απλό: κλείσε τώρα την πρώτη σου επίσκεψη και μπες κατευθείαν σε ένα δυναμικό περιβάλλον προπόνησης χτισμένο πάνω στη δύναμη, την πειθαρχία και τη μεταμόρφωση.",
