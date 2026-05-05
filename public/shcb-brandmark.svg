@@ -1,0 +1,51 @@
+<svg width="220" height="220" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="skin" x1="61" y1="40" x2="146" y2="165" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#B7FF6F"/>
+      <stop offset="0.48" stop-color="#82D942"/>
+      <stop offset="1" stop-color="#4B8D24"/>
+    </linearGradient>
+    <linearGradient id="shade" x1="106" y1="73" x2="110" y2="173" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2D5A16" stop-opacity="0"/>
+      <stop offset="1" stop-color="#1E3314" stop-opacity="0.82"/>
+    </linearGradient>
+    <linearGradient id="pants" x1="86" y1="148" x2="129" y2="190" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#3F2A4F"/>
+      <stop offset="1" stop-color="#161117"/>
+    </linearGradient>
+    <filter id="glow" x="0" y="0" width="220" height="220" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.55 0 0 0 0 1 0 0 0 0 0.3 0 0 0 0.22 0"/>
+    </filter>
+  </defs>
+  <ellipse cx="106" cy="66" rx="38" ry="27" fill="#0E0E11"/>
+  <path d="M69 48L82 24L98 34L88 54L69 48Z" fill="#1F1F20"/>
+  <path d="M88 28L108 18L123 28L118 48L92 44L88 28Z" fill="#252628"/>
+  <path d="M121 26L140 22L154 34L147 52L124 46L121 26Z" fill="#1C1C1D"/>
+  <path d="M72 58C72 42 87 30 107 30C127 30 142 42 142 58V77C142 94 127 107 107 107C87 107 72 94 72 77V58Z" fill="url(#skin)"/>
+  <path d="M80 58C87 52 96 49 107 49C118 49 127 52 134 58L128 66C122 61 115 59 107 59C99 59 92 61 86 66L80 58Z" fill="#233015"/>
+  <ellipse cx="91" cy="71" rx="10" ry="6" fill="#212619"/>
+  <ellipse cx="123" cy="71" rx="10" ry="6" fill="#212619"/>
+  <ellipse cx="91" cy="73" rx="3.8" ry="3.8" fill="#0D0D0E"/>
+  <ellipse cx="123" cy="73" rx="3.8" ry="3.8" fill="#0D0D0E"/>
+  <path d="M95 86C102 90 111 90 119 86" stroke="#233015" stroke-width="5" stroke-linecap="round"/>
+  <path d="M59 98C59 83 71 72 86 72H128C143 72 155 83 155 98V122C155 136 144 147 130 147H84C70 147 59 136 59 122V98Z" fill="url(#skin)"/>
+  <path d="M60 103H156V122C156 136 144 147 130 147H84C70 147 60 136 60 122V103Z" fill="url(#shade)"/>
+  <path d="M47 99C39 101 33 109 33 119C33 130 39 138 48 140L57 130L54 111L47 99Z" fill="url(#skin)"/>
+  <path d="M168 99C176 101 182 109 182 119C182 130 176 138 167 140L158 130L161 111L168 99Z" fill="url(#skin)"/>
+  <rect x="31" y="132" width="22" height="20" rx="10" fill="url(#skin)"/>
+  <rect x="161" y="132" width="22" height="20" rx="10" fill="url(#skin)"/>
+  <path d="M73 144H141V167C141 181 130 192 116 192H98C84 192 73 181 73 167V144Z" fill="url(#pants)"/>
+  <path d="M82 168L76 202" stroke="#5A9751" stroke-width="12" stroke-linecap="round"/>
+  <path d="M135 168L141 202" stroke="#5A9751" stroke-width="12" stroke-linecap="round"/>
+  <path d="M72 197H90" stroke="#0F0F10" stroke-width="11" stroke-linecap="round"/>
+  <path d="M127 197H146" stroke="#0F0F10" stroke-width="11" stroke-linecap="round"/>
+  <g filter="url(#glow)">
+    <ellipse cx="107" cy="109" rx="54" ry="49" fill="#8DFF4D"/>
+  </g>
+  <path d="M61 166H153" stroke="#09090A" stroke-width="2" stroke-opacity="0.35"/>
+  <path d="M45 184L61 171" stroke="#0C0C0D" stroke-width="6" stroke-linecap="round"/>
+  <path d="M169 184L153 171" stroke="#0C0C0D" stroke-width="6" stroke-linecap="round"/>
+  <text x="110" y="208" text-anchor="middle" fill="#F7F8FB" font-family="Arial, Helvetica, sans-serif" font-size="40" font-weight="900" letter-spacing="2">SHCB</text>
+  <text x="110" y="219" text-anchor="middle" fill="#BFC3C9" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="700" letter-spacing="1.2">UNLEASH YOUR INNER HERO</text>
+</svg>
