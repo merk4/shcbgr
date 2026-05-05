@@ -6,14 +6,16 @@ import styles from "./site.module.css";
 
 declare global {
   interface Window {
-    Cal?: {
-      (action: string, namespaceOrConfig?: unknown, config?: unknown): void;
-      loaded?: boolean;
-      ns?: Record<string, (...args: unknown[]) => void>;
-      q?: unknown[];
-    };
+    Cal?: CalApi;
   }
 }
+
+type CalApi = {
+  (action: string, namespaceOrConfig?: unknown, config?: unknown): void;
+  loaded?: boolean;
+  ns?: Record<string, (...args: unknown[]) => void>;
+  q?: unknown[];
+};
 
 type CalBookingProps = {
   compact?: boolean;
@@ -34,10 +36,10 @@ export function CalBooking({ compact = false }: CalBookingProps) {
         };
 
         const d = C.document;
-        C.Cal =
-          C.Cal ||
+        const existingCal = C.Cal;
+        const cal: CalApi =
+          existingCal ||
           function () {
-            const cal = C.Cal as typeof window.Cal;
             const ar = arguments;
 
             if (!cal.loaded) {
@@ -68,6 +70,7 @@ export function CalBooking({ compact = false }: CalBookingProps) {
 
             p(cal as { q?: unknown[] }, ar);
           };
+        C.Cal = cal;
       })(window, "https://app.cal.com/embed/embed.js", "init");
 
       window.Cal?.("init", namespace, {
