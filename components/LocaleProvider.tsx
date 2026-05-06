@@ -92,19 +92,19 @@ const messages: Record<Locale, Messages> = {
       titleLead: "Book First.",
       titleAccent: "Unleash Your Inner Hero.",
       copy:
-        "The main point of Superheroes Crossbox is simple: reserve your first visit now and step straight into a bold training environment built around power, discipline, and transformation.",
+        "Book your first visit and experience a training environment focused on strength, discipline, and real progress.",
       details: ["Live Booking", "CrossFit & Strength", "Theofrastou 68, Keratsini"],
       ctaPrimary: "Book Your Visit",
       ctaSecondary: "Explore Programs",
       metrics: [
         "Book instantly and lock in your first on-site training experience.",
-        "Coach-led intensity with real accountability and structure.",
-        "Hero-inspired atmosphere with a striking Hulk wall identity.",
-        "Programs for athletes, ambitious beginners, and hybrids."
+        "Structured coaching that keeps you motivated and improving.",
+        "Unique superhero-inspired atmosphere with strong energy and character.",
+        "Programs for athletes, beginners, and anyone ready to improve."
       ],
       bookingBadge: "Priority Booking",
-      bookingTitle: "Reserve your first session now.",
-      bookingCopy: "Pick a slot now. Everything else on the page supports this decision.",
+      bookingTitle: "Book your first session today.",
+      bookingCopy: "Choose your time and get started with your first workout.",
       bookingFooter: ["@superheroescrossbox", "Keratsini, Athens"]
     },
     booking: {
@@ -115,33 +115,33 @@ const messages: Record<Locale, Messages> = {
     },
     services: {
       kicker: "Services",
-      title: "Programs that turn pressure into performance.",
+      title: "Training programs built for real performance.",
       copy:
-        "Every session is built to feel sharp, demanding, and intelligently structured so your output keeps climbing without sacrificing technique.",
+        "Every session is designed to improve your fitness, strength, and technique step by step.",
       items: [
         {
           code: "CF",
           title: "CrossFit Classes",
           description:
-            "High-energy coached sessions that blend conditioning, gymnastics, and barbell work into full-spectrum performance."
+            "High-energy coached sessions combining conditioning, gymnastics, and weightlifting."
         },
         {
           code: "ST",
           title: "Strength Training",
           description:
-            "Structured lifting blocks focused on force production, movement quality, progressive overload, and durability."
+            "Structured strength training focused on power, technique, and long-term progress."
         },
         {
           code: "PC",
           title: "Personal Coaching",
           description:
-            "One-to-one programming and movement coaching built around your goals, schedule, and recovery capacity."
+            "Personal coaching tailored to your goals, schedule, and fitness level."
         },
         {
           code: "OG",
           title: "Open Gym",
           description:
-            "Independent training access with premium equipment, clean flow, and space to execute your own protocol."
+            "Open gym access with quality equipment and space for your own training."
         }
       ]
     },
@@ -149,18 +149,18 @@ const messages: Record<Locale, Messages> = {
       kicker: "Contact",
       title: "Your next level starts now.",
       copy:
-        "Bring the ambition. We'll bring the structure, energy, and coaching to turn commitment into momentum.",
+        "Bring your motivation and we'll help you turn it into results.",
       lead:
-        "This is more than a workout floor. Superheroes Crossbox is built for people who want disciplined training, visible progress, and a space with unmistakable superhero character from the first second.",
+        "This is more than just a gym. Superheroes Crossbox is built for people who want disciplined training, real progress, and a motivating atmosphere.",
       visitUs: "Visit Us",
       instagram: "Instagram",
       atmosphere: "Atmosphere",
-      atmosphereCopy: "Bold CrossFit energy, premium coaching, strong community.",
+      atmosphereCopy: "Strong CrossFit energy, experienced coaching, and a supportive community.",
       directions: "Directions",
       supportKicker: "Before You Book",
-      supportTitle: "Get a feel for the gym, then jump back to the scheduler above.",
+      supportTitle: "Explore the gym and book your first session when you're ready.",
       supportCopy:
-        "Explore the atmosphere, check the Instagram presence, and when you're ready, use the booking panel at the top of the page to secure your first training session.",
+        "Explore the atmosphere, check the Instagram presence, and when you're ready, use the booking panel at the top of the page to book your first training session.",
       supportInstagram: "View Instagram",
       supportBooking: "Jump To Booking"
     },
@@ -193,8 +193,8 @@ const messages: Record<Locale, Messages> = {
       metrics: [
         "Κλείσε άμεσα και εξασφάλισε την πρώτη σου προπονητική εμπειρία στον χώρο μας.",
         "Προπόνηση με καθοδήγηση, λογοδοσία και πραγματική δομή.",
-        "Hero-inspired ατμόσφαιρα με έντονη Hulk ταυτότητα στον χώρο.",
-        "Προγράμματα για αθλητές, αρχάριους με φιλοδοξία και υβριδικούς trainees."
+        "Superhero-inspired ατμόσφαιρα με έντονη Hulk ταυτότητα στον χώρο.",
+        "Προγράμματα για αθλητές, αρχάριους και ασκούμενους κάθε επιπέδου."
       ],
       bookingBadge: "Κύρια Κράτηση",
       bookingTitle: "Κλείσε τώρα την πρώτη σου συνεδρία.",
@@ -235,7 +235,7 @@ const messages: Record<Locale, Messages> = {
           code: "OG",
           title: "Open Gym",
           description:
-            "Ανεξάρτητη προπόνηση με πρόσβαση σε premium εξοπλισμό, καθαρό χώρο και σωστή ροή για το δικό σου protocol."
+            "Αυτόνομη προπόνηση με πρόσβαση σε ποιοτικό εξοπλισμό και άνετο χώρο."
         }
       ]
     },
@@ -243,18 +243,18 @@ const messages: Record<Locale, Messages> = {
       kicker: "Επικοινωνία",
       title: "Το επόμενο επίπεδό σου ξεκινά τώρα.",
       copy:
-        "Φέρε τη φιλοδοξία. Εμείς φέρνουμε τη δομή, την ενέργεια και την καθοδήγηση για να μετατρέψουμε τη συνέπεια σε momentum.",
+        "Φέρε τη φιλοδοξία. Εμείς φέρνουμε τη δομή, την ενέργεια και την καθοδήγηση για να μετατρέψουμε τη συνέπεια σε αποτέλεσμα.",
       lead:
-        "Αυτός ο χώρος είναι κάτι παραπάνω από ένα γυμναστήριο. Το Superheroes Crossbox είναι για ανθρώπους που θέλουν πειθαρχημένη προπόνηση, ορατή πρόοδο και έντονο superhero χαρακτήρα από το πρώτο δευτερόλεπτο.",
+        "Αυτός ο χώρος είναι κάτι παραπάνω από ένα γυμναστήριο. Το Superheroes Crossbox είναι για ανθρώπους που θέλουν πειθαρχημένη προπόνηση, ορατή πρόοδο και μοναδική superhero αισθητική από το πρώτο δευτερόλεπτο.",
       visitUs: "Θα Μας Βρεις",
       instagram: "Instagram",
       atmosphere: "Ατμόσφαιρα",
-      atmosphereCopy: "Δυνατό CrossFit energy, premium coaching και ισχυρή κοινότητα.",
+      atmosphereCopy: "Δυνατή ενέργεια CrossFit, υψηλού επιπέδου καθοδήγηση και ισχυρή κοινότητα.",
       directions: "Οδηγίες",
       supportKicker: "Πριν Την Κράτηση",
-      supportTitle: "Πάρε μια αίσθηση του gym και μετά γύρνα στο scheduler πιο πάνω.",
+      supportTitle: "Πάρε μια αίσθηση του gym και μετά γύρνα στο σύστημα κρατήσεων πιο πάνω.",
       supportCopy:
-        "Δες την ατμόσφαιρα, το Instagram και όταν είσαι έτοιμος, χρησιμοποίησε το booking panel στην κορυφή της σελίδας για να κλείσεις την πρώτη σου προπόνηση.",
+        "Δες την ατμόσφαιρα, το Instagram και όταν είσαι έτοιμος, χρησιμοποίησε τη φόρμα κράτησης στην κορυφή της σελίδας για να κλείσεις την πρώτη σου προπόνηση.",
       supportInstagram: "Δες Instagram",
       supportBooking: "Πήγαινε Στην Κράτηση"
     },

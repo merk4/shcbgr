@@ -80,7 +80,7 @@ export function SiteHeader() {
           <a className={styles.brand} href="#top" aria-label="Superheroes Crossbox home">
             <span className={styles.brandMark} aria-hidden="true">
               <Image
-                src="/shcb-brandmark.svg"
+                src="/logo.png"
                 alt=""
                 width={74}
                 height={74}
@@ -140,7 +140,7 @@ export function SiteHeader() {
             <div className={styles.mobileNavBrand}>
               <span className={styles.mobileNavBrandMark} aria-hidden="true">
                 <Image
-                  src="/shcb-brandmark.svg"
+                  src="/logo.png"
                   alt=""
                   width={58}
                   height={58}
