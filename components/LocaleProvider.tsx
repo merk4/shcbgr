@@ -68,7 +68,10 @@ type Messages = {
     supportInstagram: string;
     supportBooking: string;
   };
-  footer: string;
+  footer: {
+    tagline: string;
+    credit: string;
+  };
 };
 
 const messages: Record<Locale, Messages> = {
@@ -161,7 +164,10 @@ const messages: Record<Locale, Messages> = {
       supportInstagram: "View Instagram",
       supportBooking: "Jump To Booking"
     },
-    footer: "Superheroes Crossbox. Strength with purpose."
+    footer: {
+      tagline: "Superheroes Crossbox. Strength with purpose.",
+      credit: "Developed by our athlete"
+    }
   },
   el: {
     nav: {
@@ -252,7 +258,10 @@ const messages: Record<Locale, Messages> = {
       supportInstagram: "Δες Instagram",
       supportBooking: "Πήγαινε Στην Κράτηση"
     },
-    footer: "Superheroes Crossbox. Δύναμη με σκοπό."
+    footer: {
+      tagline: "Superheroes Crossbox. Δύναμη με σκοπό.",
+      credit: "Δημιουργήθηκε απο τον αθλητή μας"
+    }
   }
 };
 
@@ -265,18 +274,9 @@ type LocaleContextValue = {
 const LocaleContext = createContext<LocaleContextValue | null>(null);
 
 export function LocaleProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocale] = useState<Locale>("en");
+  const [locale, setLocale] = useState<Locale>("el");
 
   useEffect(() => {
-    const storedLocale = window.localStorage.getItem("shcb-locale");
-
-    if (storedLocale === "en" || storedLocale === "el") {
-      setLocale(storedLocale);
-    }
-  }, []);
-
-  useEffect(() => {
-    window.localStorage.setItem("shcb-locale", locale);
     document.documentElement.lang = locale === "el" ? "el" : "en";
   }, [locale]);
 

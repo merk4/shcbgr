@@ -99,29 +99,25 @@ export function SiteHeader() {
             ))}
           </nav>
 
-          <div className={styles.localeSwitch} role="group" aria-label="Language switcher">
-            <button
-              type="button"
-              className={`${styles.localeOption} ${locale === "en" ? styles.localeOptionActive : ""}`}
-              aria-pressed={locale === "en"}
-              onClick={() => setLocale("en")}
-            >
+          <button
+            type="button"
+            className={styles.localeSwitch}
+            aria-label="Language switcher"
+            aria-pressed={locale === "el"}
+            onClick={() => setLocale(locale === "en" ? "el" : "en")}
+          >
+            <span className={`${styles.localeOption} ${locale === "en" ? styles.localeOptionActive : ""}`}>
               EN
-            </button>
-            <button
-              type="button"
-              className={`${styles.localeOption} ${locale === "el" ? styles.localeOptionActive : ""}`}
-              aria-pressed={locale === "el"}
-              onClick={() => setLocale("el")}
-            >
+            </span>
+            <span className={`${styles.localeOption} ${locale === "el" ? styles.localeOptionActive : ""}`}>
               GR
-            </button>
+            </span>
             <span
               className={styles.localeThumb}
               aria-hidden="true"
               style={{ transform: locale === "el" ? "translateX(100%)" : "translateX(0)" }}
             />
-          </div>
+          </button>
 
           <button
             type="button"
