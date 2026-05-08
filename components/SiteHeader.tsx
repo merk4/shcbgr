@@ -2,11 +2,14 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { gsap } from "gsap";
 import { useLocale } from "./LocaleProvider";
 import styles from "./site.module.css";
 
 export function SiteHeader() {
   const dialogRef = useRef<HTMLDialogElement | null>(null);
+  const sheetRef = useRef<HTMLDivElement | null>(null);
+  const isClosingRef = useRef(false);
   const [isOpen, setIsOpen] = useState(false);
   const { locale, setLocale, messages } = useLocale();
   const navItems = [
@@ -17,27 +20,98 @@ export function SiteHeader() {
 
   const closeMenu = useCallback(() => {
     const dialog = dialogRef.current;
+    const sheet = sheetRef.current;
 
-    if (!dialog) {
+    if (!dialog || !dialog.open || isClosingRef.current) {
       return;
     }
 
-    if (dialog.open) {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !sheet) {
       dialog.close();
+      setIsOpen(false);
+      return;
     }
 
-    setIsOpen(false);
+    isClosingRef.current = true;
+    const mobileItems = dialog.querySelectorAll("[data-mobile-nav-item]");
+
+    gsap.to(mobileItems, {
+      opacity: 0,
+      y: 12,
+      duration: 0.18,
+      stagger: 0.02,
+      ease: "power2.in",
+      overwrite: true
+    });
+
+    gsap.to(sheet, {
+      xPercent: 8,
+      opacity: 0.72,
+      duration: 0.28,
+      ease: "power2.in",
+      overwrite: true,
+      onComplete: () => {
+        isClosingRef.current = false;
+
+        if (dialog.open) {
+          dialog.close();
+        }
+
+        setIsOpen(false);
+        gsap.set(sheet, { clearProps: "transform,opacity" });
+        gsap.set(mobileItems, { clearProps: "transform,opacity" });
+      }
+    });
   }, []);
 
   const openMenu = () => {
     const dialog = dialogRef.current;
+    const sheet = sheetRef.current;
 
-    if (!dialog) {
+    if (!dialog || dialog.open || isClosingRef.current) {
       return;
     }
 
     dialog.showModal();
     setIsOpen(true);
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !sheet) {
+      return;
+    }
+
+    const mobileItems = dialog.querySelectorAll("[data-mobile-nav-item]");
+
+    gsap.set(sheet, {
+      xPercent: 8,
+      opacity: 0.72
+    });
+
+    gsap.set(mobileItems, {
+      opacity: 0,
+      y: 18
+    });
+
+    gsap
+      .timeline({
+        defaults: {
+          ease: "power3.out"
+        }
+      })
+      .to(sheet, {
+        xPercent: 0,
+        opacity: 1,
+        duration: 0.42
+      })
+      .to(
+        mobileItems,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.34,
+          stagger: 0.04
+        },
+        "-=0.2"
+      );
   };
 
   useEffect(() => {
@@ -135,7 +209,7 @@ export function SiteHeader() {
       </div>
 
       <dialog ref={dialogRef} id="mobile-nav-dialog" className={styles.mobileNavDialog}>
-        <div className={styles.mobileNavSheet}>
+        <div ref={sheetRef} className={styles.mobileNavSheet}>
           <div className={styles.mobileNavHeader}>
             <div className={styles.mobileNavBrand}>
               <span className={styles.mobileNavBrandMark} aria-hidden="true">
@@ -166,7 +240,7 @@ export function SiteHeader() {
 
           <nav className={styles.mobileNavLinks} aria-label="Mobile">
             {navItems.map((item) => (
-              <a key={item.href} href={item.href} onClick={closeMenu}>
+              <a key={item.href} href={item.href} onClick={closeMenu} data-mobile-nav-item>
                 <span>{item.label}</span>
               </a>
             ))}
@@ -178,6 +252,7 @@ export function SiteHeader() {
               className={`${styles.localeOption} ${locale === "en" ? styles.localeOptionActive : ""}`}
               aria-pressed={locale === "en"}
               onClick={() => setLocale("en")}
+              data-mobile-nav-item
             >
               English
             </button>
@@ -186,6 +261,7 @@ export function SiteHeader() {
               className={`${styles.localeOption} ${locale === "el" ? styles.localeOptionActive : ""}`}
               aria-pressed={locale === "el"}
               onClick={() => setLocale("el")}
+              data-mobile-nav-item
             >
               GR
             </button>
@@ -198,10 +274,16 @@ export function SiteHeader() {
               target="_blank"
               rel="noreferrer"
               onClick={closeMenu}
+              data-mobile-nav-item
             >
               {messages.nav.instagram}
             </a>
-            <a className={`${styles.button} ${styles.buttonSecondary}`} href="#booking" onClick={closeMenu}>
+            <a
+              className={`${styles.button} ${styles.buttonSecondary}`}
+              href="#booking"
+              onClick={closeMenu}
+              data-mobile-nav-item
+            >
               {messages.nav.bookVisit}
             </a>
           </div>

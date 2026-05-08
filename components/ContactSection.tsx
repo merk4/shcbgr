@@ -2,8 +2,11 @@
 
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLocale } from "./LocaleProvider";
 import styles from "./site.module.css";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export function ContactSection() {
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -16,53 +19,68 @@ export function ContactSection() {
       return;
     }
 
-    const items = section.querySelectorAll("[data-contact-reveal]");
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) {
-            return;
-          }
+    const ctx = gsap.context(() => {
+      const heading = section.querySelector<HTMLElement>("[data-contact-heading]");
+      const panels = gsap.utils.toArray<HTMLElement>("[data-contact-panel]");
 
-          gsap.to(entry.target, {
+      if (!heading || panels.length === 0) {
+        return;
+      }
+
+      gsap.set(heading, {
+        opacity: 0,
+        y: 26
+      });
+
+      gsap.set(panels, {
+        opacity: 0,
+        y: 34,
+        scale: 0.985
+      });
+
+      gsap
+        .timeline({
+          defaults: {
+            ease: "power3.out"
+          },
+          scrollTrigger: {
+            trigger: section,
+            start: "top 72%",
+            once: true
+          }
+        })
+        .to(heading, {
+          opacity: 1,
+          y: 0,
+          duration: 0.75
+        })
+        .to(
+          panels,
+          {
             opacity: 1,
             y: 0,
             scale: 1,
-            duration: 0.9,
-            ease: "power3.out"
-          });
+            duration: 0.82,
+            stagger: 0.14
+          },
+          "-=0.35"
+        );
+    }, section);
 
-          observer.unobserve(entry.target);
-        });
-      },
-      {
-        threshold: 0.18,
-        rootMargin: "0px 0px -8% 0px"
-      }
-    );
-
-    gsap.set(items, {
-      opacity: 0,
-      y: 30,
-      scale: 0.985
-    });
-
-    items.forEach((item) => observer.observe(item));
-
-    return () => observer.disconnect();
+    return () => ctx.revert();
   }, []);
 
   return (
     <section ref={sectionRef} id="contact" className={styles.section}>
       <div className={styles.container}>
-        <div data-contact-reveal className={styles.sectionHeading}>
+        <div data-contact-heading className={styles.sectionHeading}>
           <div className={styles.sectionKicker}>{messages.contact.kicker}</div>
           <h2>{messages.contact.title}</h2>
           <p>{messages.contact.copy}</p>
         </div>
 
         <div className={styles.contactGrid}>
-          <aside data-contact-reveal className={styles.contactPanel}>
+          <aside data-contact-panel className={styles.contactPanel}>
             <p className={styles.contactLead}>
               {messages.contact.lead}
             </p>
@@ -100,7 +118,7 @@ export function ContactSection() {
             </div>
           </aside>
 
-          <div data-contact-reveal className={styles.contactForm}>
+          <div data-contact-panel className={styles.contactForm}>
             <div className={styles.contactSupportBlock}>
               <div className={styles.bookingKicker}>{messages.contact.supportKicker}</div>
               <h3>{messages.contact.supportTitle}</h3>

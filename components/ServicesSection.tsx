@@ -2,8 +2,11 @@
 
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLocale } from "./LocaleProvider";
 import styles from "./site.module.css";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export function ServicesSection() {
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -16,47 +19,61 @@ export function ServicesSection() {
       return;
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) {
-            return;
-          }
+    const ctx = gsap.context(() => {
+      const heading = section.querySelector<HTMLElement>("[data-section-heading]");
+      const cards = gsap.utils.toArray<HTMLElement>("[data-service-card]");
 
-          gsap.to(entry.target, {
+      if (!heading || cards.length === 0) {
+        return;
+      }
+
+      gsap.set(heading, {
+        opacity: 0,
+        y: 26
+      });
+
+      gsap.set(cards, {
+        opacity: 0,
+        y: 34,
+        scale: 0.985
+      });
+
+      gsap
+        .timeline({
+          defaults: {
+            ease: "power3.out"
+          },
+          scrollTrigger: {
+            trigger: section,
+            start: "top 72%",
+            once: true
+          }
+        })
+        .to(heading, {
+          opacity: 1,
+          y: 0,
+          duration: 0.75
+        })
+        .to(
+          cards,
+          {
             opacity: 1,
             y: 0,
             scale: 1,
-            duration: 0.9,
-            ease: "power3.out"
-          });
+            duration: 0.78,
+            stagger: 0.1
+          },
+          "-=0.35"
+        );
+    }, section);
 
-          observer.unobserve(entry.target);
-        });
-      },
-      {
-        threshold: 0.18,
-        rootMargin: "0px 0px -8% 0px"
-      }
-    );
-
-    const targets = section.querySelectorAll("[data-reveal]");
-
-    gsap.set(targets, {
-      opacity: 0,
-      y: 30,
-      scale: 0.985
-    });
-
-    targets.forEach((target) => observer.observe(target));
-
-    return () => observer.disconnect();
+    return () => ctx.revert();
   }, []);
 
   return (
     <section ref={sectionRef} id="services" className={styles.section}>
       <div className={styles.container}>
-        <div data-reveal className={styles.sectionHeading}>
+        <div data-section-heading className={styles.sectionHeading}>
           <div className={styles.sectionKicker}>{messages.services.kicker}</div>
           <h2>{messages.services.title}</h2>
           <p>{messages.services.copy}</p>
@@ -64,7 +81,7 @@ export function ServicesSection() {
 
         <div className={styles.servicesGrid}>
           {messages.services.items.map((service) => (
-            <article key={service.title} data-reveal className={styles.serviceCard}>
+            <article key={service.title} data-service-card className={styles.serviceCard}>
               <div className={styles.serviceBadge} aria-hidden="true">
                 {service.code}
               </div>

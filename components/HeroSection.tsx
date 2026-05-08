@@ -1,10 +1,16 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { useLocale } from "./LocaleProvider";
 import { CalBooking } from "./CalBooking";
 import styles from "./site.module.css";
+
+const HeroScene = dynamic(
+  () => import("./HeroScene").then((module) => module.HeroScene),
+  { ssr: false }
+);
 
 type LayerSpec = {
   element: HTMLDivElement;
@@ -178,6 +184,7 @@ export function HeroSection() {
       <div className={styles.heroStage} aria-hidden="true">
         <div ref={backgroundRef} className={`${styles.parallaxLayer} ${styles.heroBackground}`} />
         <div ref={midRef} className={`${styles.parallaxLayer} ${styles.heroMiddle}`}>
+          <HeroScene />
           <div className={styles.heroGrid} />
           <div className={styles.heroOrbGreen} />
           <div className={styles.heroOrbPurple} />
