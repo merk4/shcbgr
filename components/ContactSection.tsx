@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { trackEvent } from "@/lib/analytics";
 import { useLocale } from "./LocaleProvider";
 import styles from "./site.module.css";
 
@@ -11,6 +12,16 @@ gsap.registerPlugin(ScrollTrigger);
 export function ContactSection() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const { messages } = useLocale();
+
+  const handleContactClick = (
+    action: "instagram" | "directions" | "booking",
+    source: "contact_meta" | "contact_support"
+  ) => {
+    trackEvent("contact_action_click", {
+      action,
+      source
+    });
+  };
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -105,6 +116,7 @@ export function ContactSection() {
                 href="https://www.instagram.com/superheroescrossbox/"
                 target="_blank"
                 rel="noreferrer"
+                onClick={() => handleContactClick("instagram", "contact_meta")}
               >
                 {messages.contact.instagram}
               </a>
@@ -112,6 +124,7 @@ export function ContactSection() {
                 href="https://maps.google.com/?q=%CE%98%CE%B5%CF%8C%CF%86%CF%81%CE%B1%CF%83%CF%84%CE%BF%CF%85+68,+%CE%9A%CE%B5%CF%81%CE%B1%CF%84%CF%83%CE%AF%CE%BD%CE%B9+187+56"
                 target="_blank"
                 rel="noreferrer"
+                onClick={() => handleContactClick("directions", "contact_meta")}
               >
                 {messages.contact.directions}
               </a>
@@ -129,10 +142,15 @@ export function ContactSection() {
                   href="https://www.instagram.com/superheroescrossbox/"
                   target="_blank"
                   rel="noreferrer"
+                  onClick={() => handleContactClick("instagram", "contact_support")}
                 >
                   {messages.contact.supportInstagram}
                 </a>
-                <a className={`${styles.button} ${styles.buttonSecondary}`} href="#booking">
+                <a
+                  className={`${styles.button} ${styles.buttonSecondary}`}
+                  href="#booking"
+                  onClick={() => handleContactClick("booking", "contact_support")}
+                >
                   {messages.contact.supportBooking}
                 </a>
               </div>

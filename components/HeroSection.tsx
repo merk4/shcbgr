@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import { trackEvent } from "@/lib/analytics";
 import { useLocale } from "./LocaleProvider";
 import { CalBooking } from "./CalBooking";
 import styles from "./site.module.css";
@@ -24,6 +25,13 @@ export function HeroSection() {
   const midRef = useRef<HTMLDivElement | null>(null);
   const contentRef = useRef<HTMLDivElement | null>(null);
   const { messages } = useLocale();
+
+  const handleHeroCtaClick = (cta: "booking" | "services") => {
+    trackEvent("hero_cta_click", {
+      cta,
+      section: "hero"
+    });
+  };
 
   useEffect(() => {
     const hero = heroRef.current;
@@ -212,10 +220,18 @@ export function HeroSection() {
                 ))}
               </div>
               <div data-hero-reveal className={styles.heroActions}>
-                <a className={`${styles.button} ${styles.buttonPrimary}`} href="#booking">
+                <a
+                  className={`${styles.button} ${styles.buttonPrimary}`}
+                  href="#booking"
+                  onClick={() => handleHeroCtaClick("booking")}
+                >
                   {messages.hero.ctaPrimary}
                 </a>
-                <a className={`${styles.button} ${styles.buttonSecondary}`} href="#services">
+                <a
+                  className={`${styles.button} ${styles.buttonSecondary}`}
+                  href="#services"
+                  onClick={() => handleHeroCtaClick("services")}
+                >
                   {messages.hero.ctaSecondary}
                 </a>
               </div>

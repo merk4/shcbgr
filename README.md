@@ -52,12 +52,15 @@ The application uses a mixed rendering model:
 |   |-- BackToTopButton.tsx
 |   |-- CalBooking.tsx
 |   |-- ContactSection.tsx
+|   |-- GoogleAnalytics.tsx
 |   |-- HeroSection.tsx
 |   |-- LocaleProvider.tsx
 |   |-- ServicesSection.tsx
 |   |-- SiteFooter.tsx
 |   |-- SiteHeader.tsx
 |   `-- site.module.css
+|-- lib/
+|   `-- analytics.ts
 |-- public/
 |   |-- logo.png
 |   `-- shcb-brandmark.svg
@@ -336,6 +339,16 @@ Open the site locally:
 http://localhost:3000
 ```
 
+### Environment Variables
+
+To enable Google Analytics 4, add this environment variable locally and in Netlify:
+
+```text
+NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
+```
+
+If the variable is missing, the analytics scripts and event tracking are skipped automatically.
+
 ## Production
 
 Create a production build:
@@ -372,6 +385,21 @@ Current configuration:
 - `reactStrictMode: true`
 
 This is a good default for catching unsafe React patterns during development.
+
+### Analytics
+
+The project includes a GA4 integration using:
+
+- `components/GoogleAnalytics.tsx` for the global GA script
+- `lib/analytics.ts` for reusable event tracking
+
+Tracked events currently include:
+
+- `hero_cta_click`
+- `contact_action_click`
+- `locale_switch`
+- `mobile_menu_open`
+- `mobile_nav_click`
 
 ### Fonts
 

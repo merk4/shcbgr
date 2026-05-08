@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
+import { trackEvent } from "@/lib/analytics";
 import { useLocale } from "./LocaleProvider";
 import styles from "./site.module.css";
 
@@ -17,6 +18,18 @@ export function SiteHeader() {
     { href: "#services", label: messages.nav.services },
     { href: "#contact", label: messages.nav.contact }
   ];
+
+  const handleLocaleChange = (nextLocale: "en" | "el") => {
+    if (locale === nextLocale) {
+      return;
+    }
+
+    trackEvent("locale_switch", {
+      from_locale: locale,
+      to_locale: nextLocale
+    });
+    setLocale(nextLocale);
+  };
 
   const closeMenu = useCallback(() => {
     const dialog = dialogRef.current;
@@ -74,6 +87,9 @@ export function SiteHeader() {
 
     dialog.showModal();
     setIsOpen(true);
+    trackEvent("mobile_menu_open", {
+      source: "header"
+    });
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !sheet) {
       return;
@@ -178,7 +194,7 @@ export function SiteHeader() {
             className={styles.localeSwitch}
             aria-label="Language switcher"
             aria-pressed={locale === "el"}
-            onClick={() => setLocale(locale === "en" ? "el" : "en")}
+            onClick={() => handleLocaleChange(locale === "en" ? "el" : "en")}
           >
             <span className={`${styles.localeOption} ${locale === "en" ? styles.localeOptionActive : ""}`}>
               EN
@@ -251,7 +267,7 @@ export function SiteHeader() {
               type="button"
               className={`${styles.localeOption} ${locale === "en" ? styles.localeOptionActive : ""}`}
               aria-pressed={locale === "en"}
-              onClick={() => setLocale("en")}
+              onClick={() => handleLocaleChange("en")}
               data-mobile-nav-item
             >
               English
@@ -260,7 +276,7 @@ export function SiteHeader() {
               type="button"
               className={`${styles.localeOption} ${locale === "el" ? styles.localeOptionActive : ""}`}
               aria-pressed={locale === "el"}
-              onClick={() => setLocale("el")}
+              onClick={() => handleLocaleChange("el")}
               data-mobile-nav-item
             >
               GR
@@ -273,7 +289,12 @@ export function SiteHeader() {
               href="https://www.instagram.com/superheroescrossbox/"
               target="_blank"
               rel="noreferrer"
-              onClick={closeMenu}
+              onClick={() => {
+                trackEvent("mobile_nav_click", {
+                  action: "instagram"
+                });
+                closeMenu();
+              }}
               data-mobile-nav-item
             >
               {messages.nav.instagram}
@@ -281,7 +302,12 @@ export function SiteHeader() {
             <a
               className={`${styles.button} ${styles.buttonSecondary}`}
               href="#booking"
-              onClick={closeMenu}
+              onClick={() => {
+                trackEvent("mobile_nav_click", {
+                  action: "booking"
+                });
+                closeMenu();
+              }}
               data-mobile-nav-item
             >
               {messages.nav.bookVisit}
