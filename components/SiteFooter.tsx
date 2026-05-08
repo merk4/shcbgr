@@ -9,15 +9,15 @@ export function SiteFooter() {
   return (
     <footer className={styles.footer}>
       <p>{messages.footer.tagline}</p>
-      <p>
-        {messages.footer.credit}{" "}
+      <p className={styles.footerCredit}>
+        <span>{messages.footer.credit}</span>
         <a
           href="https://www.instagram.com/nmerk_/"
           target="_blank"
           rel="noreferrer"
           className={styles.footerLink}
         >
-          @nmerk_
+          @nmerk
         </a>
       </p>
     </footer>

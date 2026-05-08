@@ -886,6 +886,15 @@
   margin-top: 0.35rem;
 }
 
+.footerCredit {
+  display: inline-grid;
+  gap: 0.08rem;
+}
+
+.footerCredit .footerLink {
+  justify-self: center;
+}
+
 .footerLink {
   color: inherit;
   text-decoration: underline;
